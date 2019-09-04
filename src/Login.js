@@ -13,13 +13,13 @@ export default class Login extends React.Component {
     };
 
     submit = e => {
-        this.submit(e);
-    }
+        console.log(e);
+    };
 
     render() {
         return (
             <div>
-                <form onSubmit={submit}>
+                <form onSubmit={this.submit}>
                     <div>
                         <label form="username">Username</label>
                         <input type="text" name="username" id="username" value={this.state.username}

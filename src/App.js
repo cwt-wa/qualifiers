@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Login from "./Login";
+import DrawOpponents from "./DrawOpponents";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
           API.</p>
 
         <Login/>
+        <DrawOpponents/>
       </div>
   );
 }
