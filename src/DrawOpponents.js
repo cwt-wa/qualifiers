@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import ApplicantsCheckboxList from "./ApplicantsCheckboxList";
 import ErrorBoundary from "./ErrorBoundary";
 
