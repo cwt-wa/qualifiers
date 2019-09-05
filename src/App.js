@@ -1,18 +1,45 @@
 import React from 'react';
+import {Router} from 'director/build/director'
 import Login from "./Login";
-import DrawOpponents from "./DrawOpponents";
+// import Login from "./Login";
+// import DrawOpponents from "./DrawOpponents";
 
-function App() {
-  return (
-      <div>
-        <h1>CWT Qualifiers</h1>
-        <p>This is a tool to manage easy match-making for specifically for CWT qualifiers as it leverages the CWT 6
-          API.</p>
+export default class App extends React.Component {
 
-        <Login/>
-        <DrawOpponents/>
-      </div>
-  );
+  constructor(props) {
+    super(props);
+
+    this.state = {route: null}
+  }
+
+  render() {
+    let content;
+
+    if (this.state.route === '/login') {
+      content = (<Login/>);
+    } else {
+      content = (
+          <p>This is a tool to manage easy match-making for specifically for CWT qualifiers as it leverages the CWT 6
+            API.</p>
+      )
+    }
+
+
+    return (
+        <div>
+          <h1>CWT Qualifiers</h1>
+
+          {content}
+        </div>
+    );
+  }
+
+  componentDidMount() {
+    console.log('mnt');
+
+    Router({
+      '/': () => this.setState({route: '/'}),
+      '/login': () => this.setState({route: '/login'})
+    }).init('/');
+  }
 }
-
-export default App;
