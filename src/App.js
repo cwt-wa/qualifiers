@@ -26,11 +26,23 @@ export default class App extends React.Component {
 
 
     return (
-        <div>
-          <h1 className="no-wrap">CWT Qualifiers</h1>
+        <>
+          <div className="navbar">
+            <div className="container">
+              <ul>
+                <li><a href="#/">Home</a></li>
+                <li><a href="#/login">Login</a></li>
+              </ul>
+            </div>
+          </div>
 
-          {content}
-        </div>
+          <div className="container">
+            <div className="content">
+              <h1 className="no-wrap">CWT Qualifiers</h1>
+              {content}
+            </div>
+          </div>
+        </>
     );
   }
 
