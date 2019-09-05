@@ -1,9 +1,11 @@
 import React from 'react';
 
+const toastr = require('toastr');
+
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {username: '', password: ''};
   }
 
   onChange = e => {
@@ -13,7 +15,29 @@ export default class Login extends React.Component {
   };
 
   submit = e => {
-    console.log(e);
+    e.preventDefault();
+
+    const username = this.state.username;
+    const password = this.state.password;
+
+    fetch(
+        'http://localhost:9000/api/auth/login', {
+          method: 'POST',
+          body: JSON.stringify({username, password}),
+          headers: {'Content-Type': 'application/json'},
+        })
+        .then(res => {
+          if (!res.ok) {
+            if (res.status === 503) throw Error("Service unavailable.");
+            if (res.status === 401) throw Error("Invalid credentials.");
+            throw Error("Unknown error.")
+          }
+          return res.json();
+        })
+        .then(res => {
+          // todo login
+        })
+        .catch(err => toastr.error(err));
   };
 
   render() {
@@ -26,7 +50,7 @@ export default class Login extends React.Component {
           </div>
           <div>
             <label form="passwords">Password</label>
-            <input type="password" name="password" id="password" value={this.state.paswords}
+            <input type="password" name="password" id="password" value={this.state.password}
                    onChange={this.onChange}/>
           </div>
           <div>
