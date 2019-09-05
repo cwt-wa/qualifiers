@@ -18,26 +18,21 @@ export default class Login extends React.Component {
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.submit}>
-                    <div>
-                        <label form="username">Username</label>
-                        <input type="text" name="username" id="username" value={this.state.username}
-                               onChange={this.onChange}/>
-                    </div>
-                    <div>
-                        <label form="passwords">Password</label>
-                        <input type="password" name="password" id="password" value={this.state.paswords}
-                               onChange={this.onChange}/>
-                    </div>
-                    <div>
-                        <input type="submit" value="Sign in"/>
-                    </div>
-                </form>
-
-                <div><pre>username {this.state.username}</pre></div>
-                <div><pre>password {this.state.password}</pre></div>
-            </div>
+            <form onSubmit={this.submit}>
+                <div>
+                    <label form="username">Username</label>
+                    <input type="text" name="username" id="username" value={this.state.username}
+                           onChange={this.onChange}/>
+                </div>
+                <div>
+                    <label form="passwords">Password</label>
+                    <input type="password" name="password" id="password" value={this.state.paswords}
+                           onChange={this.onChange}/>
+                </div>
+                <div>
+                    <input type="submit" value="Sign in"/>
+                </div>
+            </form>
         );
     }
 };
