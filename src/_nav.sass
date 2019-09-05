@@ -1,0 +1,36 @@
+@import "~milligram/src/Color"
+
+.navbar
+  background-color: $color-primary
+  position: fixed
+  width: 100%
+  z-index: 99
+
+.container > #root
+  padding-top: 8rem
+
+.navbar > .container
+  display: flex
+  justify-content: center
+
+.navbar ul
+  list-style-type: none
+  overflow: hidden
+  margin: 0
+
+.navbar li
+  float: left
+  margin: 0
+
+.navbar li a
+  padding: 1.5rem 2rem
+  display: block
+  color: white
+  text-align: center
+  text-decoration: none
+
+  &.active
+    background-color: $color-tertiary
+
+.navbar li a:hover
+  background-color: $color-tertiary
