@@ -27,7 +27,7 @@ export default class App extends React.Component {
 
     return (
         <div>
-          <h1>CWT Qualifiers</h1>
+          <h1 className="no-wrap">CWT Qualifiers</h1>
 
           {content}
         </div>
