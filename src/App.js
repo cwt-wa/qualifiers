@@ -30,8 +30,8 @@ export default class App extends React.Component {
           <div className="navbar">
             <div className="container">
               <ul>
-                <li><a href="#/">Home</a></li>
-                <li><a href="#/login">Login</a></li>
+                <li><a className={this.state.route === '/' ? 'active' : null} href="#/">Home</a></li>
+                <li><a className={this.state.route === '/login' ? 'active' : null} href="#/login">Login</a></li>
               </ul>
             </div>
           </div>
