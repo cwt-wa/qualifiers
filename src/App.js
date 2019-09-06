@@ -1,7 +1,7 @@
 import React from 'react';
 import {Router} from 'director/build/director'
 import Login from "./Login";
-import { Provider } from 'react-redux'
+import {Provider} from 'react-redux'
 import store from './redux/store'
 
 export default class App extends React.Component {
@@ -46,7 +46,7 @@ export default class App extends React.Component {
     );
   }
 
-    componentDidMount() {
+  componentDidMount() {
     Router({
       '/': () => this.setState({route: '/'}),
       '/login': () => this.setState({route: '/login'})
