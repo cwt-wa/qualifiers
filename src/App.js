@@ -1,8 +1,8 @@
 import React from 'react';
 import {Router} from 'director/build/director'
 import Login from "./Login";
-// import Login from "./Login";
-// import DrawOpponents from "./DrawOpponents";
+import { Provider } from 'react-redux'
+import store from './redux/store'
 
 export default class App extends React.Component {
 
@@ -26,7 +26,7 @@ export default class App extends React.Component {
 
 
     return (
-        <>
+        <Provider store={store}>
           <div className="navbar">
             <div className="container">
               <ul>
@@ -42,7 +42,7 @@ export default class App extends React.Component {
               {content}
             </div>
           </div>
-        </>
+        </Provider>
     );
   }
 

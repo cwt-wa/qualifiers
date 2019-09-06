@@ -1,8 +1,10 @@
 import React from 'react';
+import {connect} from "react-redux";
 
-const toastr = require('toastr');
+import Fetch from './fetch';
+import {authLogin} from "./redux/actions";
 
-export default class Login extends React.Component {
+class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {username: '', password: ''};
@@ -20,24 +22,13 @@ export default class Login extends React.Component {
     const username = this.state.username;
     const password = this.state.password;
 
-    fetch(
-        'http://localhost:9000/api/auth/login', {
-          method: 'POST',
-          body: JSON.stringify({username, password}),
-          headers: {'Content-Type': 'application/json'},
-        })
-        .then(res => {
-          if (!res.ok) {
-            if (res.status === 503) throw Error("Service unavailable.");
-            if (res.status === 401) throw Error("Invalid credentials.");
-            throw Error("Unknown error.")
-          }
-          return res.json();
-        })
-        .then(res => {
-          // todo login
-        })
-        .catch(err => toastr.error(err));
+    Fetch.login(username, password).then(res => {
+      // todo login
+      console.log('success');
+      console.log(res);
+      this.props.authLogin(res.token);
+      return true;
+    });
   };
 
   render() {
@@ -59,4 +50,9 @@ export default class Login extends React.Component {
         </form>
     );
   }
-};
+}
+
+export default connect(
+    null,
+    {authLogin}
+)(Login);
