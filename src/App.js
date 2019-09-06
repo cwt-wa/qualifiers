@@ -46,9 +46,7 @@ export default class App extends React.Component {
     );
   }
 
-  componentDidMount() {
-    console.log('mnt');
-
+    componentDidMount() {
     Router({
       '/': () => this.setState({route: '/'}),
       '/login': () => this.setState({route: '/login'})
