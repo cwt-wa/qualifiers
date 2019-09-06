@@ -1,11 +1,11 @@
 import React from 'react';
 import {Router} from 'director/build/director'
 import Login from "./Login";
-import {Provider} from 'react-redux'
-import store from './redux/store'
 import Navigation from "./Navigation";
+import {connect} from "react-redux";
+import {authLogin} from "./redux/actions";
 
-export default class App extends React.Component {
+class App extends React.Component {
 
   constructor(props) {
     super(props);
@@ -26,7 +26,7 @@ export default class App extends React.Component {
     }
 
     return (
-        <Provider store={store}>
+        <>
           <div className="navbar">
             <div className="container">
               <Navigation route={this.state.route}/>
@@ -39,7 +39,7 @@ export default class App extends React.Component {
               {content}
             </div>
           </div>
-        </Provider>
+        </>
     );
   }
 
@@ -50,3 +50,6 @@ export default class App extends React.Component {
     }).init('/');
   }
 }
+
+export default connect(state => ({authenticated: state.auth}), {authLogin})(App);
+
