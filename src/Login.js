@@ -27,6 +27,7 @@ class Login extends React.Component {
     Fetch.login(username, password)
         .then(res => {
           this.props.authLogin(res.token);
+          window.localStorage.setItem('token', res.token);
           toastr.success('Logged in.');
           window.location.href = "/#/";
         });

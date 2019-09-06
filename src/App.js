@@ -48,6 +48,9 @@ class App extends React.Component {
       '/': () => this.setState({route: '/'}),
       '/login': () => this.setState({route: '/login'})
     }).init('/');
+
+    const token = window.localStorage.getItem('token');
+    if (token != null) this.props.authLogin(token);
   }
 }
 
