@@ -1,7 +1,7 @@
 import React from 'react';
 import {Router} from 'director/build/director'
-import Login from "./Login";
 import Navigation from "./Navigation";
+import Content from "./Content";
 import {connect} from "react-redux";
 import {authLogin} from "./redux/actions";
 
@@ -14,17 +14,6 @@ class App extends React.Component {
   }
 
   render() {
-    let content;
-
-    if (this.state.route === '/login') {
-      content = (<Login/>);
-    } else {
-      content = (
-          <p><strong>CWT Qualifiers</strong> is a tool to manage easy match-making
-            specifically for CWT qualifiers as it leverages the CWT 6 API.</p>
-      )
-    }
-
     return (
         <>
           <div className="navbar">
@@ -36,7 +25,7 @@ class App extends React.Component {
           <div className="container">
             <div className="content">
               <h1 className="no-wrap">CWT Qualifiers</h1>
-              {content}
+              <Content route={this.state.route}/>
             </div>
           </div>
         </>
