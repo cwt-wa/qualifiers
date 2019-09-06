@@ -22,13 +22,8 @@ class Login extends React.Component {
     const username = this.state.username;
     const password = this.state.password;
 
-    Fetch.login(username, password).then(res => {
-      // todo login
-      console.log('success');
-      console.log(res);
-      this.props.authLogin(res.token);
-      return true;
-    });
+    Fetch.login(username, password)
+        .then(res => this.props.authLogin(res.token));
   };
 
   render() {
