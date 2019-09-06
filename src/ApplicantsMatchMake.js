@@ -1,10 +1,15 @@
 import React from 'react';
 import CheckboxList from "./CheckboxList";
+import toastr from "toastr";
 
 export default class ApplicantsMatchMake extends React.Component {
 
   submit = e => {
     e.preventDefault();
+    if (this.state.noMatchUsers.length > this.props.users.length / 2) {
+      toastr.error("Too many selections.");
+      return;
+    }
     this.props.submit(this.state.noMatchUsers);
   };
 
