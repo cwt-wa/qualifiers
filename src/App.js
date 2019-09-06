@@ -19,11 +19,10 @@ export default class App extends React.Component {
       content = (<Login/>);
     } else {
       content = (
-          <p>This is a tool to manage easy match-making for specifically for CWT qualifiers as it leverages the CWT 6
-            API.</p>
+          <p><strong>CWT Qualifiers</strong> is a tool to manage easy match-making
+            specifically for CWT qualifiers as it leverages the CWT 6 API.</p>
       )
     }
-
 
     return (
         <Provider store={store}>
