@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from "react-redux";
 import {authLogout} from "./redux/actions";
 import Login from "./Login";
+import DrawOpponents from "./DrawOpponents";
 
 class Content extends React.Component {
 
@@ -17,7 +18,7 @@ class Content extends React.Component {
       } else {
 
         if (this.props.authUser.roles.indexOf('ROLE_ADMIN') !== -1) {
-          return <p>Admin {this.props.authUser.username}</p>;
+          return <DrawOpponents/>;
         } else {
           return <p>User {this.props.authUser.username}</p>;
         }
