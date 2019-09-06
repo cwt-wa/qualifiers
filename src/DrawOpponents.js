@@ -1,16 +1,29 @@
 import React from 'react';
 import ApplicantsCheckboxList from "./ApplicantsCheckboxList";
 import ApplicantsMatchMake from "./ApplicantsMatchMake";
+import {shuffle} from "./util";
+import {connect} from "react-redux";
+import {draw} from "./redux/actions";
+import toastr from 'toastr';
 
-export default class DrawOpponents extends React.Component {
+class DrawOpponents extends React.Component {
 
     state = {drawnUsers: []};
 
     draw = noMatchUsers => {
-        console.log('noMatchUsers', noMatchUsers);
-        console.log('drawnUsers', this.state.drawnUsers);
+        const allUsers = [...shuffle(this.state.drawnUsers), ...shuffle(noMatchUsers)];
+        const numberOfGames = allUsers.length / 2;
+        const homeUsers = allUsers.slice(0, numberOfGames);
+        const awayUsers = allUsers.slice(numberOfGames);
 
-        // todo perform the actual draw 
+        const draw = new Array(numberOfGames).fill(null).map((_, idx) => ({
+            homeUser: homeUsers[idx],
+            awayUser: awayUsers[idx],
+        }));
+
+        // TODO Firebase Real-Time Database REST Call to Persist
+        this.props.draw(draw);
+        toastr.success('Applicants drawn');
     };
 
     render() {
@@ -23,4 +36,6 @@ export default class DrawOpponents extends React.Component {
             users={this.state.drawnUsers}
             submit={this.draw}/>;
     }
-};
+}
+
+export default connect(null, {draw})(DrawOpponents);
