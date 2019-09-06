@@ -23,9 +23,9 @@ class Navigation extends React.Component {
           {this.props.authenticated
               ? (
                   <li>
-                    <a onClick={this.logOut} className="pointer">
+                    <button type="button" onClick={this.logOut} className="btn-link">
                       Log out
-                    </a>
+                    </button>
                   </li>)
               : (
                   <li>

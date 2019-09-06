@@ -22,15 +22,14 @@
   float: left
   margin: 0
 
-.navbar li a
+.navbar li a,
+.navbar li button.btn-link
   padding: 1.5rem 2rem
   display: block
   color: white
-  text-align: center
+  text-align: center  
   text-decoration: none
 
-  &.active
+  &.active,
+  &:hover
     background-color: $color-tertiary
-
-.navbar li a:hover
-  background-color: $color-tertiary
