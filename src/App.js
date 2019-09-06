@@ -3,6 +3,7 @@ import {Router} from 'director/build/director'
 import Login from "./Login";
 import {Provider} from 'react-redux'
 import store from './redux/store'
+import Navigation from "./Navigation";
 
 export default class App extends React.Component {
 
@@ -28,10 +29,7 @@ export default class App extends React.Component {
         <Provider store={store}>
           <div className="navbar">
             <div className="container">
-              <ul>
-                <li><a className={this.state.route === '/' ? 'active' : null} href="#/">Home</a></li>
-                <li><a className={this.state.route === '/login' ? 'active' : null} href="#/login">Login</a></li>
-              </ul>
+              <Navigation route={this.state.route}/>
             </div>
           </div>
 

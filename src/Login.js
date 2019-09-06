@@ -4,6 +4,8 @@ import {connect} from "react-redux";
 import Fetch from './fetch';
 import {authLogin} from "./redux/actions";
 
+const toastr = require('toastr');
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -23,10 +25,18 @@ class Login extends React.Component {
     const password = this.state.password;
 
     Fetch.login(username, password)
-        .then(res => this.props.authLogin(res.token));
+        .then(res => {
+          this.props.authLogin(res.token);
+          toastr.success('Logged in.');
+          window.location.href = "/#/";
+        });
   };
 
   render() {
+    if (this.props.authenticated) {
+      return <p>You are logged in.</p>;
+    }
+
     return (
         <form onSubmit={this.submit}>
           <div>
@@ -48,6 +58,6 @@ class Login extends React.Component {
 }
 
 export default connect(
-    null,
+    state => ({authenticated: state.auth}),
     {authLogin}
 )(Login);
