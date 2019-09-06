@@ -3,7 +3,7 @@ import Fetch from './fetch';
 
 export default class ApplicantsCheckboxList extends React.Component {
 
-    state = {applicants: [], errorLoadingUsers: false};
+    state = {applicants: []};
 
     componentDidMount() {
         Fetch.applicants()
@@ -16,14 +16,14 @@ export default class ApplicantsCheckboxList extends React.Component {
         }
 
         return (
-            <div>
+            <>
+                <p>Select applicants to be drawn into qualifiers.</p>
+
                 {this.state.applicants.map(a =>
                     <div key={a.id}>
-                        <label>
-                            <input name="applicant" type="checkbox"/>{a.applicant.username}
-                        </label>
+                        <input name="applicant" id={'applicant' + a.id} type="checkbox"/>
+                        <label className="label-inline" htmlFor={'applicant' + a.id}>{a.applicant.username}</label>
                     </div>)}
-            </div>
-        );
+            </>);
     }
 };
