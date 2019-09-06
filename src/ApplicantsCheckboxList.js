@@ -1,15 +1,13 @@
 import React from 'react';
+import Fetch from './fetch';
 
 export default class ApplicantsCheckboxList extends React.Component {
 
     state = {applicants: [], errorLoadingUsers: false};
 
     componentDidMount() {
-        fetch('http://localhost:9000/api/tournament/current/applications')
-            .then(res => res.json())
-            .then(applicants => applicants.sort((a, b) => a.applicant.username.localeCompare(b.applicant.username)))
-            .then(applicants => this.setState({applicants}))
-            .catch(reason => this.setState({errorLoadingUsers: true}));
+        Fetch.applicants()
+            .then(applicants => this.setState({applicants}));
     }
 
     render() {

@@ -25,3 +25,15 @@ module.exports.login = (username, password) =>
           toastr.error(err);
           return Promise.reject(err);
         });
+
+module.exports.applicants = () =>
+    fetch(
+        apiUrl + '/tournament/current/applications', {
+          method: 'GET',
+          headers,
+        })
+        .then(chore)
+        .catch(err => {
+          toastr.error(err);
+          return Promise.reject(err);
+        });
