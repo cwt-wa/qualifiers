@@ -6,10 +6,6 @@ const toastr = require('toastr');
 
 class Navigation extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   logOut = e => {
     e.preventDefault();
     this.props.authLogout();
