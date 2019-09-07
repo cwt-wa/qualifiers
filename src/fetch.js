@@ -13,6 +13,11 @@ const chore = (res) => {
   return res.json();
 };
 
+const errHandler = err => {
+  toastr.error(err);
+  return Promise.reject(err);
+};
+
 module.exports.login = (username, password) =>
     fetch(
         apiUrl + '/auth/login', {
@@ -21,10 +26,7 @@ module.exports.login = (username, password) =>
           headers,
         })
         .then(chore)
-        .catch(err => {
-          toastr.error(err);
-          return Promise.reject(err);
-        });
+        .catch(errHandler);
 
 module.exports.applicants = () =>
     fetch(
@@ -33,7 +35,4 @@ module.exports.applicants = () =>
           headers,
         })
         .then(chore)
-        .catch(err => {
-          toastr.error(err);
-          return Promise.reject(err);
-        });
+        .catch(errHandler);
