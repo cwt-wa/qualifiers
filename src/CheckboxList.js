@@ -27,4 +27,8 @@ export default class CheckboxList extends React.Component {
       }
     </>)
   }
+
+  componentDidMount() {
+    this.props.onSelection(this.state.selected)
+  }
 }
