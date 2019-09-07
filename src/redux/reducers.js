@@ -7,5 +7,8 @@ function auth(state = null, action) {
   else return state;
 }
 
+function draw(state = null, action) {
+  return action.games || [];
+}
 
-export default combineReducers({auth});
+export default combineReducers({auth, draw});
