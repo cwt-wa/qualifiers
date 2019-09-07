@@ -11,7 +11,8 @@ class DrawOpponents extends React.Component {
     state = {drawnUsers: []};
 
     draw = noMatchUsers => {
-        const allUsers = [...shuffle(this.state.drawnUsers), ...shuffle(noMatchUsers)];
+        const drawnUsersWithoutNoMatchUsers = this.state.drawnUsers.filter(u => noMatchUsers.indexOf(u) === -1);
+        const allUsers = [...shuffle(drawnUsersWithoutNoMatchUsers), ...shuffle(noMatchUsers)];
         const numberOfGames = allUsers.length / 2;
         const homeUsers = allUsers.slice(0, numberOfGames);
         const awayUsers = allUsers.slice(numberOfGames);
