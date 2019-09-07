@@ -15,7 +15,7 @@ class Content extends React.Component {
     if (this.props.draw.length) {
       return <ShowDraw/>
     } else {
-      if (this.props.authUser && this.props.authUser.roles.indexOf('ROLE_ADMIN') !== -1) {
+      if (this.props.authUser && this.props.authUser.isAdmin) {
         return <DrawOpponents/>;
       }
     }

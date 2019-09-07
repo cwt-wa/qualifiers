@@ -20,9 +20,19 @@ const errHandler = err => {
 
 module.exports.login = (username, password) =>
     fetch(
-        apiUrl + '/auth/login', {
+        apiUrl + '/auth/firebase-login', {
           method: 'POST',
           body: JSON.stringify({username, password}),
+          headers,
+        })
+        .then(chore)
+        .catch(errHandler);
+
+module.exports.refreshAuth = token =>
+    fetch(
+        apiUrl + '/auth/firebase-refresh', {
+          method: 'POST',
+          body: JSON.stringify({token}),
           headers,
         })
         .then(chore)

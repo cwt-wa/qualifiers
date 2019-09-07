@@ -3,7 +3,8 @@ import {Router} from 'director/build/director'
 import Navigation from "./Navigation";
 import Content from "./Content";
 import {connect} from "react-redux";
-import {authLogin} from "./redux/actions";
+import {authLogin, authLogout} from "./redux/actions";
+import Fetch from "./fetch";
 
 class App extends React.Component {
 
@@ -38,10 +39,17 @@ class App extends React.Component {
       '/login': () => this.setState({route: '/login'})
     }).init('/');
 
-    const token = window.localStorage.getItem('token');
-    if (token != null) this.props.authLogin(token);
+    const idToken = window.localStorage.getItem('idToken');
+    if (idToken != null) this.props.authLogin(idToken);
+
+    const refreshToken = window.localStorage.getItem('refreshToken');
+    if (refreshToken != null) {
+      Fetch.refreshAuth(refreshToken)
+          .then(freshTokens => this.props.authLogin(freshTokens.idToken, freshTokens.refreshToken))
+          .catch(() => this.props.authLogout());
+    }
   }
 }
 
-export default connect(state => ({authenticated: state.auth}), {authLogin})(App);
+export default connect(state => ({authenticated: state.auth}), {authLogin, authLogout})(App);
 
