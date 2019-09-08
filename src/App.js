@@ -32,7 +32,8 @@ class App extends React.Component {
   componentDidMount() {
     Router({
       '/': () => this.setState({route: '/'}),
-      '/login': () => this.setState({route: '/login'})
+      '/login': () => this.setState({route: '/login'}),
+      '/report': () => this.setState({route: '/report'})
     }).init('/');
 
     const idToken = window.localStorage.getItem('idToken');

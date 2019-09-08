@@ -5,6 +5,7 @@ import Login from "./Login";
 import DrawOpponents from "./DrawOpponents";
 import ShowDraw from "./ShowDraw";
 import Fetch from "./fetch";
+import Report from "./Report";
 
 class Content extends React.Component {
 
@@ -13,6 +14,8 @@ class Content extends React.Component {
   render() {
     if (this.props.route === '/login') {
       return <Login/>;
+    } else if (this.props.route === '/report') {
+      return <Report/>;
     }
 
     if (this.state.loading) {

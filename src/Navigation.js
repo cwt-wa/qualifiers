@@ -13,6 +13,10 @@ class Navigation extends React.Component {
   };
 
   render() {
+    const canReport = this.props.authUser && this.props.draw && this.props.draw
+        .filter(g => g.homeUser.id === this.props.authUser.id || g.awayUser.id === this.props.authUser.id)
+        .length === 1;
+
     return (
         <ul>
           <li>
@@ -20,6 +24,14 @@ class Navigation extends React.Component {
               Home
             </a>
           </li>
+
+          {canReport && (
+              <li>
+                <a className={this.props.route === '/report' ? 'active' : null} href="#/report">
+                  Report
+                </a>
+              </li>)}
+
           {this.props.authUser
               ? (
                   <li>
@@ -38,4 +50,4 @@ class Navigation extends React.Component {
   }
 }
 
-export default connect(state => ({authUser: state.auth}), {authLogout})(Navigation);
+export default connect(state => ({authUser: state.auth, draw: state.draw}), {authLogout})(Navigation);
