@@ -51,10 +51,7 @@ class App extends React.Component {
     currentTournamentPromise.then(this.props.saveCurrentTournament);
 
     Promise.all([currentTournamentPromise, refreshAuthPromise])
-        .finally(() => {
-          console.log('loading', this.state.loading);
-          return this.setState({loading: false});
-        });
+        .finally(() => this.setState({loading: false}));
   }
 }
 
