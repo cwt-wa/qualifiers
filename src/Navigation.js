@@ -32,8 +32,7 @@ class Navigation extends React.Component {
                     <a className={this.props.route === '/login' ? 'active' : null} href="#/login">
                       Login
                     </a>
-                  </li>)
-          }
+                  </li>)}
         </ul>
     )
   }
