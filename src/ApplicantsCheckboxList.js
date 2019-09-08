@@ -10,7 +10,8 @@ export default class ApplicantsCheckboxList extends React.Component {
 
     componentDidMount() {
         Fetch.applicants()
-            .then(applicants => this.setState({applicants}));
+            .then(applicants => this.setState({applicants}))
+            .catch(Fetch.defaultErrorHandler);
     }
 
     submit = e => {

@@ -2,20 +2,35 @@ const toastr = require('toastr');
 
 const apiUrl = 'http://localhost:9000/api';
 const headers = {'Content-Type': 'application/json'};
+const fallbackMsg = 'An unknown error occurred.';
 
 const chore = (res) => {
-  if (!res.ok) {
-    if (res.status === 503) return Promise.reject("Service currently unavailable");
-    if (res.status === 401) return Promise.reject("Unauthorized");
-    if (res.status === 403) return Promise.reject("Forbidden");
-    return Promise.reject(res.message || "Unknown error"); // TODO Not sure about message key.
-  }
+  if (!res.ok) throw res;
   return res.json();
 };
 
-const errHandler = err => {
-  toastr.error(err);
-  return Promise.reject(err);
+function toastStatusCodeText(err) {
+  if (err.status === 401) toastr.error("Unauthorized");
+  else if (err.status === 503) toastr.error("Service unavailable");
+  else toastr.error(fallbackMsg);
+}
+
+module.exports.defaultErrorHandler = err => {
+  if (err.json) {
+    err.json()
+        .then(resJson => {
+          if (!resJson.message) throw err;
+          toastr.error(resJson.message);
+          console.error(err);
+        })
+        .catch(errJson => {
+          toastStatusCodeText(err);
+          console.error(errJson);
+        });
+  } else {
+    toastStatusCodeText(err);
+    console.error(err);
+  }
 };
 
 module.exports.login = (username, password) =>
@@ -25,8 +40,7 @@ module.exports.login = (username, password) =>
           body: JSON.stringify({username, password}),
           headers,
         })
-        .then(chore)
-        .catch(errHandler);
+        .then(chore);
 
 module.exports.refreshAuth = token =>
     fetch(
@@ -35,8 +49,7 @@ module.exports.refreshAuth = token =>
           body: JSON.stringify({token}),
           headers,
         })
-        .then(chore)
-        .catch(errHandler);
+        .then(chore);
 
 module.exports.applicants = () =>
     fetch(
@@ -44,5 +57,4 @@ module.exports.applicants = () =>
           method: 'GET',
           headers,
         })
-        .then(chore)
-        .catch(errHandler);
+        .then(chore);

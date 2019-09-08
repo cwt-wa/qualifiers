@@ -29,7 +29,8 @@ class Login extends React.Component {
           this.props.authLogin(res.idToken, res.refreshToken);
           toastr.success('Logged in.');
           window.location.href = "/#/";
-        });
+        })
+        .catch(Fetch.defaultErrorHandler);
   };
 
   render() {
