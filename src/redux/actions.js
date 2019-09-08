@@ -1,6 +1,8 @@
 import {AUTH_LOGIN, AUTH_LOGOUT, DRAW} from "./actionTypes";
+import Fetch from '../fetch';
 
 export const authLogin = (token, refreshToken) => {
+  Fetch.firebaseIdToken = token;
   window.localStorage.setItem('idToken', token);
   if (refreshToken != null) {
     window.localStorage.setItem('refreshToken', refreshToken);
@@ -15,6 +17,7 @@ export const authLogin = (token, refreshToken) => {
 export const authLogout = () => {
   window.localStorage.removeItem('refreshToken');
   window.localStorage.removeItem('idToken');
+  Fetch.firebaseIdToken = null;
 
   return ({
     type: AUTH_LOGOUT

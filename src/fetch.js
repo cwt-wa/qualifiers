@@ -1,8 +1,11 @@
 const toastr = require('toastr');
 
 const apiUrl = 'http://localhost:9000/api';
+const firebaseApiUrl = 'https://cwt-qualifiers.firebaseio.com';
 const headers = {'Content-Type': 'application/json'};
 const fallbackMsg = 'An unknown error occurred.';
+
+module.exports.firebaseIdToken = null;
 
 const chore = (res) => {
   if (!res.ok) throw res;
@@ -55,6 +58,15 @@ module.exports.applicants = () =>
     fetch(
         apiUrl + '/tournament/current/applications', {
           method: 'GET',
+          headers,
+        })
+        .then(chore);
+
+module.exports.saveDraw = games =>
+    fetch(
+        `${firebaseApiUrl}/games.json?auth=${module.exports.firebaseIdToken}`, {
+          method: 'POST',
+          body: JSON.stringify(games),
           headers,
         })
         .then(chore);

@@ -4,6 +4,7 @@ import ApplicantsMatchMake from "./ApplicantsMatchMake";
 import {shuffle} from "./util";
 import {connect} from "react-redux";
 import {draw} from "./redux/actions";
+import Fetch from './fetch';
 import toastr from 'toastr';
 
 class DrawOpponents extends React.Component {
@@ -22,9 +23,10 @@ class DrawOpponents extends React.Component {
             awayUser: awayUsers[idx],
         }));
 
-        // TODO Firebase Real-Time Database REST Call to Persist
-        this.props.draw(draw);
-        toastr.success('Applicants drawn');
+        Fetch.saveDraw(draw).then(() => {
+            this.props.draw(draw);
+            toastr.success('Applicants drawn');
+        });
     };
 
     render() {

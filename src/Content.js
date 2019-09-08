@@ -4,6 +4,7 @@ import {authLogout} from "./redux/actions";
 import Login from "./Login";
 import DrawOpponents from "./DrawOpponents";
 import ShowDraw from "./ShowDraw";
+import Fetch from "./fetch";
 
 class Content extends React.Component {
 
