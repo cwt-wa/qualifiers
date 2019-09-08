@@ -74,7 +74,7 @@ module.exports.saveDraw = (year, games) =>
 
 module.exports.retrieveDraw = year =>
     fetch(
-        `${firebaseApiUrl}/draw/${year}.json?auth=${module.exports.firebaseIdToken}`, {
+        `${firebaseApiUrl}/draw/${year}.json`, {
           method: 'GET',
           headers,
         })
