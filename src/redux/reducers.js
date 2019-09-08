@@ -1,5 +1,5 @@
 import {combineReducers} from "redux";
-import {AUTH_LOGIN, AUTH_LOGOUT} from "./actionTypes";
+import {AUTH_LOGIN, AUTH_LOGOUT, DRAW} from "./actionTypes";
 
 function auth(state = null, action) {
   if (action.type === AUTH_LOGIN) return state != null ? state : JSON.parse(atob(action.token.split('.')[1]));
@@ -8,6 +8,7 @@ function auth(state = null, action) {
 }
 
 function draw(state = null, action) {
+  if (action.type !== DRAW) return state;
   return action.games || [];
 }
 
