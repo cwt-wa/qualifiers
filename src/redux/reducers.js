@@ -11,4 +11,10 @@ function draw(state = null, action) {
   return action.games || [];
 }
 
-export default combineReducers({auth, draw});
+function currentTournament(state = null, action) {
+  if (action.type === 'SAVE') return action.currentTournament || state;
+  return state
+}
+
+export default combineReducers({auth, draw, currentTournament});
+

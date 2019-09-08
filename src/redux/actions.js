@@ -1,4 +1,4 @@
-import {AUTH_LOGIN, AUTH_LOGOUT, DRAW} from "./actionTypes";
+import {AUTH_LOGIN, AUTH_LOGOUT, DRAW,} from "./actionTypes";
 import Fetch from '../fetch';
 
 export const authLogin = (token, refreshToken) => {
@@ -28,3 +28,5 @@ export const draw = games => ({
   type: DRAW,
   games
 });
+
+export const saveCurrentTournament = currentTournament => ({type: 'SAVE', currentTournament});

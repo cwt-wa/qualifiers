@@ -19,14 +19,15 @@ class DrawOpponents extends React.Component {
         const awayUsers = allUsers.slice(numberOfGames);
 
         const draw = new Array(numberOfGames).fill(null).map((_, idx) => ({
-            homeUser: homeUsers[idx],
-            awayUser: awayUsers[idx],
+            homeUser: {id: homeUsers[idx].id, username: homeUsers[idx].username},
+            awayUser: {id: awayUsers[idx].id, username: awayUsers[idx].username},
         }));
 
-        Fetch.saveDraw(draw).then(() => {
-            this.props.draw(draw);
-            toastr.success('Applicants drawn');
-        });
+        Fetch.saveDraw(new Date(this.props.currentTournament.created).getUTCFullYear(), draw)
+            .then(() => {
+                this.props.draw(draw);
+                toastr.success('Applicants drawn');
+            });
     };
 
     render() {
@@ -41,4 +42,4 @@ class DrawOpponents extends React.Component {
     }
 }
 
-export default connect(null, {draw})(DrawOpponents);
+export default connect(state => ({currentTournament: state.currentTournament}), {draw})(DrawOpponents);

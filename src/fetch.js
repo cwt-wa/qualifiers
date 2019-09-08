@@ -62,11 +62,29 @@ module.exports.applicants = () =>
         })
         .then(chore);
 
-module.exports.saveDraw = games =>
+module.exports.saveDraw = (year, games) =>
     fetch(
-        `${firebaseApiUrl}/games.json?auth=${module.exports.firebaseIdToken}`, {
-          method: 'POST',
+        `${firebaseApiUrl}/draw/${year}.json?auth=${module.exports.firebaseIdToken}`, {
+          method: 'PUT',
           body: JSON.stringify(games),
+          headers,
+        })
+        .then(chore);
+
+
+module.exports.retrieveDraw = year =>
+    fetch(
+        `${firebaseApiUrl}/draw/${year}.json?auth=${module.exports.firebaseIdToken}`, {
+          method: 'GET',
+          headers,
+        })
+        .then(chore);
+
+
+module.exports.currentTournament = () =>
+    fetch(
+        apiUrl + '/tournament/current', {
+          method: 'GET',
           headers,
         })
         .then(chore);
