@@ -20,7 +20,7 @@ class Navigation extends React.Component {
               Home
             </a>
           </li>
-          {this.props.authenticated
+          {this.props.authUser
               ? (
                   <li>
                     <button type="button" onClick={this.logOut} className="btn-link">
@@ -38,4 +38,4 @@ class Navigation extends React.Component {
   }
 }
 
-export default connect(state => ({authenticated: state.auth}), {authLogout})(Navigation);
+export default connect(state => ({authUser: state.auth}), {authLogout})(Navigation);
