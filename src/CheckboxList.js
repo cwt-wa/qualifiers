@@ -6,7 +6,7 @@ export default class CheckboxList extends React.Component {
 
   toggle = elem => {
     this.setState(state => {
-      if (state.selected.indexOf(elem) !== -1) state.selected.splice(this.props.selected.indexOf(elem), 1);
+      if (state.selected.indexOf(elem) !== -1) state.selected.splice(state.selected.indexOf(elem), 1);
       else state.selected.push(elem);
       return {selected: state.selected};
     }, () => this.props.onSelection(this.state.selected));
