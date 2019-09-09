@@ -27,6 +27,10 @@ class Report extends React.Component {
   render() {
     if (!this.props.opponent || !this.props.game) return (<p>Loading…</p>);
 
+    if (this.props.game.homeScore != null || this.props.game.awayScore != null) {
+      return (<p className="text-center">{this.props.game.homeUser.username} {this.props.game.homeScore}–{this.props.game.awayScore} {this.props.game.awayUser.username}</p>)
+    }
+
     return (
         <form onSubmit={this.submit} className="text-center">
           <p className="text-left">
