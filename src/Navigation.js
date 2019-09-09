@@ -13,6 +13,7 @@ class Navigation extends React.Component {
   };
 
   render() {
+    console.log(this.props.draw);
     const canReport = this.props.authUser && this.props.draw && this.props.draw
         .filter(g => g.homeUser.id === this.props.authUser.id || g.awayUser.id === this.props.authUser.id)
         .length === 1;

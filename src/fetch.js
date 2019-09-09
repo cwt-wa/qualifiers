@@ -36,6 +36,8 @@ module.exports.defaultErrorHandler = err => {
   }
 };
 
+module.exports.makeGameKey = game => btoa(`${game.homeUser.id}${game.awayUser.id}`);
+
 module.exports.login = (username, password) =>
     fetch(
         apiUrl + '/auth/firebase-login', {
@@ -62,15 +64,20 @@ module.exports.applicants = () =>
         })
         .then(chore);
 
-module.exports.saveDraw = (year, games) =>
-    fetch(
-        `${firebaseApiUrl}/draw/${year}.json?auth=${module.exports.firebaseIdToken}`, {
-          method: 'PUT',
-          body: JSON.stringify(games),
-          headers,
-        })
-        .then(chore);
+module.exports.saveDraw = (year, games) => {
+  const draw = games.reduce((prev, curr) => {
+    prev[module.exports.makeGameKey(curr)] = curr;
+    return prev;
+  }, {});
 
+  return fetch(
+      `${firebaseApiUrl}/draw/${year}.json?auth=${module.exports.firebaseIdToken}`, {
+        method: 'PUT',
+        body: JSON.stringify(draw),
+        headers,
+      })
+      .then(chore);
+};
 
 module.exports.retrieveDraw = year =>
     fetch(
