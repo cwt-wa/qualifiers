@@ -57,14 +57,14 @@ class Report extends React.Component {
 export default connect(state => {
   if (!state.auth || !state.draw) return state;
 
-  const game = state.draw
-      .find(g => g.homeUser.id === state.auth.id
-          || g.awayUser.id === state.auth.id);
+  const gameKey = Object.keys(state.draw)
+      .find(gKey => state.draw[gKey].homeUser.id === state.auth.id
+          || state.draw[gKey].awayUser.id === state.auth.id);
 
   let opponent;
-  if (game.homeUser.id === state.auth.id) opponent = game.awayUser;
-  else opponent = game.homeUser;
+  if (state.draw[gameKey].homeUser.id === state.auth.id) opponent = state.draw[gameKey].awayUser;
+  else opponent = state.draw[gameKey].homeUser;
 
-  return ({game, opponent, authUser: state.auth});
+  return ({game: state.draw[gameKey], opponent, authUser: state.auth});
 })(Report);
 

@@ -20,7 +20,7 @@ class Content extends React.Component {
 
     if (this.state.loading) {
       return <p>Loading…</p>
-    } else if (this.props.games.length) {
+    } else if (this.props.gamesAvailable) {
       return <ShowDraw/>
     } else if (this.props.currentTournament != null) {
       if (this.props.authUser && this.props.authUser.isAdmin) {
@@ -35,7 +35,7 @@ class Content extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.currentTournament != null && (!this.props.games || !this.props.games.length)) {
+    if (this.props.currentTournament != null && (!this.props.gamesAvailable || !this.props.gamesAvailable)) {
       Fetch.retrieveDraw(new Date(this.props.currentTournament.created).getUTCFullYear())
           .then(this.props.draw)
           .finally(() => this.setState({loading: false}));
@@ -46,5 +46,5 @@ class Content extends React.Component {
 }
 
 export default connect(
-    state => ({authUser: state.auth, games: state.draw, currentTournament: state.currentTournament}),
+    state => ({authUser: state.auth, gamesAvailable: Object.keys(state.draw || {}).length > 0, currentTournament: state.currentTournament}),
     {authLogout, draw})(Content);

@@ -26,5 +26,5 @@ class ShowDraw extends React.Component {
   }
 }
 
-export default connect(state => ({draw: state.draw}))(ShowDraw);
+export default connect(state => ({draw: Object.keys(state.draw).map(gKey => state.draw[gKey])}))(ShowDraw);
 
