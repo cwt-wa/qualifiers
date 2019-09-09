@@ -87,6 +87,15 @@ module.exports.retrieveDraw = year =>
         })
         .then(chore);
 
+module.exports.reportGame = (year, gameKey, homeScore, awayScore) =>
+    fetch(
+        `${firebaseApiUrl}/draw/${year}/${gameKey}.json`, {
+          method: 'PATCH',
+          headers,
+          body: JSON.stringify({homeScore, awayScore})
+        })
+        .then(chore);
+
 
 module.exports.currentTournament = () =>
     fetch(

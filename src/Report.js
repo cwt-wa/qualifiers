@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import toastr from 'toastr';
+import Fetch from './fetch';
 
 class Report extends React.Component {
 
@@ -9,7 +9,17 @@ class Report extends React.Component {
   onScoreChange = e => this.setState({[e.target.name]: e.target.value});
 
   submit = e => {
-    // todo there's no game id to save to
+    e.preventDefault();
+
+    Fetch
+        .reportGame(
+            this.props.tournamentYear, this.props.gameKey,
+            this.state.homeScore, this.state.awayScore)
+        .then(res => {
+          // todo action
+          // reportGame(gameKey, res.homeScore, res.awayScore);
+        })
+        .catch(Fetch.defaultErrorHandler);
   };
 
   render() {
@@ -65,6 +75,8 @@ export default connect(state => {
   if (state.draw[gameKey].homeUser.id === state.auth.id) opponent = state.draw[gameKey].awayUser;
   else opponent = state.draw[gameKey].homeUser;
 
-  return ({game: state.draw[gameKey], opponent, authUser: state.auth});
+  const tournamentYear = new Date(state.currentTournament.created).getUTCFullYear();
+
+  return ({game: state.draw[gameKey], gameKey, opponent, tournamentYear, authUser: state.auth});
 })(Report);
 
