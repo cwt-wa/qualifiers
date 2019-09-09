@@ -1,7 +1,7 @@
 const toastr = require('toastr');
 
-const apiUrl = 'http://localhost:9000/api';
-const firebaseApiUrl = 'https://cwt-qualifiers.firebaseio.com';
+const apiUrl = process.env.REACT_APP_CWT_API_ENDPOINT;
+const firebaseApiUrl = process.env.REACT_APP_FIREBASE_API_ENDPOINT;
 const headers = {'Content-Type': 'application/json'};
 const fallbackMsg = 'An unknown error occurred.';
 
