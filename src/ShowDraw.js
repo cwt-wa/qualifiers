@@ -13,7 +13,9 @@ class ShowDraw extends React.Component {
                 {g.homeUser.username}
               </td>
               <td className="text-center">
+                {g.homeScore}
                 –
+                {g.awayScore}
               </td>
               <td className="text-left">
                 {g.awayUser.username}
