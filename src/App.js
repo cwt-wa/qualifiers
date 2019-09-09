@@ -21,7 +21,7 @@ class App extends React.Component {
 
           <div className="container">
             <div className="content">
-              <h1 className="no-wrap">CWT Qualifiers</h1>
+              <h1 className="no-wrap text-center">CWT Qualifiers</h1>
               {this.state.loading ? <p>Loading…</p> : <Content route={this.state.route}/>}
             </div>
           </div>
