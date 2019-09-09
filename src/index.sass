@@ -8,10 +8,18 @@ $color-quinary: #2A9D8F !default
 @import "~milligram/src/milligram"
 @import "./nav"
 @import "./toastr"
+@import "./footer"
 
 *
   margin: 0
   padding: 0
+
+html, body
+  height: 100%
+
+body
+  display: flex
+  flex-direction: column
 
 input[type=submit],
 input[type=submit]:focus,
