@@ -8,8 +8,13 @@ function auth(state = null, action) {
 }
 
 function draw(state = null, action) {
-  if (action.type !== DRAW) return state;
-  return action.games || [];
+  if (action.type === DRAW) return action.games;
+  if (action.type === 'REPORT') {
+    const {gameKey, homeScore, awayScore} = action.report;
+    state[gameKey] = {...state[gameKey], homeScore, awayScore};
+    return {...state};
+  }
+  return state;
 }
 
 function currentTournament(state = null, action) {

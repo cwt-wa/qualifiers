@@ -29,4 +29,9 @@ export const draw = games => ({
   games
 });
 
+export const reportGame = (gameKey, homeScore, awayScore) => ({
+  type: 'REPORT',
+  report: {gameKey, homeScore, awayScore}
+});
+
 export const saveCurrentTournament = currentTournament => ({type: 'SAVE', currentTournament});

@@ -1,6 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
 import Fetch from './fetch';
+import {reportGame} from './redux/actions'
+import toastr from 'toastr';
 
 class Report extends React.Component {
 
@@ -14,10 +16,10 @@ class Report extends React.Component {
     Fetch
         .reportGame(
             this.props.tournamentYear, this.props.gameKey,
-            this.state.homeScore, this.state.awayScore)
+            parseInt(this.state.homeScore), parseInt(this.state.awayScore))
         .then(res => {
-          // todo action
-          // reportGame(gameKey, res.homeScore, res.awayScore);
+          toastr.success('Game reported');
+          this.props.reportGame(this.props.gameKey, res.homeScore, res.awayScore);
         })
         .catch(Fetch.defaultErrorHandler);
   };
@@ -78,5 +80,5 @@ export default connect(state => {
   const tournamentYear = new Date(state.currentTournament.created).getUTCFullYear();
 
   return ({game: state.draw[gameKey], gameKey, opponent, tournamentYear, authUser: state.auth});
-})(Report);
+}, {reportGame})(Report);
 
