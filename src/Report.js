@@ -20,6 +20,7 @@ class Report extends React.Component {
         .then(res => {
           toastr.success('Game reported');
           this.props.reportGame(this.props.gameKey, res.homeScore, res.awayScore);
+          window.location.href = "/#/";
         })
         .catch(Fetch.defaultErrorHandler);
   };

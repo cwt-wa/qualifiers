@@ -49,6 +49,7 @@ class Navigation extends React.Component {
 export default connect(state => {
   const canReport = state.auth && state.draw && Object.keys(state.draw)
       .filter(gKey => state.draw[gKey].homeUser.id === state.auth.id || state.draw[gKey].awayUser.id === state.auth.id)
+      .filter(gKey => state.draw[gKey].homeScore == null && state.draw[gKey].awayScore == null)
       .length === 1;
   return ({authUser: state.auth, canReport});
 }, {authLogout})(Navigation);
