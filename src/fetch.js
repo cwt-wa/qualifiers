@@ -89,7 +89,7 @@ module.exports.retrieveDraw = year =>
 
 module.exports.reportGame = (year, gameKey, homeScore, awayScore) =>
     fetch(
-        `${firebaseApiUrl}/draw/${year}/${gameKey}.json`, {
+        `${firebaseApiUrl}/draw/${year}/${gameKey}.json?auth=${module.exports.firebaseIdToken}`, {
           method: 'PATCH',
           headers,
           body: JSON.stringify({homeScore, awayScore})
