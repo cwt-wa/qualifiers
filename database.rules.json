@@ -1,0 +1,21 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": "auth.isAdmin === true",
+    "draw": {
+      "$year": {
+        "$game_key": {
+          ".write": "auth.isAdmin === true || (data.child('awayUser').child('id').val() === auth.id || data.child('homeUser').child('id').val() === auth.id)",
+          "homeScore": {
+            ".validate": "!data.exists()"
+          },
+          "awayScore": {
+            ".validate": "!data.exists()"
+          },
+          "$other": { ".validate": false }
+        }
+      }
+    }
+  }
+}
+
