@@ -12,7 +12,7 @@
           "awayScore": {
             ".validate": "!data.exists()"
           },
-          "$other": { ".validate": false }
+          "$other": { ".validate": "auth.isAdmin === true" }
         }
       }
     }
