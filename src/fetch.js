@@ -5,8 +5,6 @@ const firebaseApiUrl = process.env.REACT_APP_FIREBASE_API_ENDPOINT;
 const headers = {'Content-Type': 'application/json'};
 const fallbackMsg = 'An unknown error occurred.';
 
-module.exports.firebaseIdToken = null;
-
 const chore = (res) => {
   if (!res.ok) throw res;
   return res.json();
@@ -71,7 +69,7 @@ module.exports.saveDraw = (year, games) => {
   }, {});
 
   return fetch(
-      `${firebaseApiUrl}/draw/${year}.json?auth=${module.exports.firebaseIdToken}`, {
+      `${firebaseApiUrl}/draw/${year}.json?auth=${localStorage.getItem('idToken')}`, {
         method: 'PUT',
         body: JSON.stringify(draw),
         headers,
@@ -89,7 +87,7 @@ module.exports.retrieveDraw = year =>
 
 module.exports.reportGame = (year, gameKey, homeScore, awayScore) =>
     fetch(
-        `${firebaseApiUrl}/draw/${year}/${gameKey}.json?auth=${module.exports.firebaseIdToken}`, {
+        `${firebaseApiUrl}/draw/${year}/${gameKey}.json?auth=${localStorage.getItem('idToken')}`, {
           method: 'PATCH',
           headers,
           body: JSON.stringify({homeScore, awayScore})
